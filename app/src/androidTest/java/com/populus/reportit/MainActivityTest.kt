@@ -8,6 +8,7 @@ import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.Matchers.allOf
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,9 +20,17 @@ class MainActivityTest {
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+    
+    private lateinit var page: MainActivityPage
+
+    @Before
+    fun setupPage() {
+        page = MainActivityPage()
+    }
 
     @Test
-    fun loadScreen_verifyUiElements() {
+    fun loadScreen_verify_ui() {
+        
         val viewGroup = onView(
                 allOf(withId(R.id.action_bar),
                         withParent(allOf(withId(R.id.action_bar_container),
@@ -42,29 +51,6 @@ class MainActivityTest {
                         isDisplayed()))
         imageButton.check(matches(isDisplayed()))
 
-        val frameLayout2 = onView(
-                allOf(withId(R.id.nav_view),
-                        withParent(allOf(withId(R.id.container),
-                                withParent(withId(android.R.id.content)))),
-                        isDisplayed()))
-        frameLayout2.check(matches(isDisplayed()))
-
-        val frameLayout3 = onView(
-                allOf(withId(R.id.navigation_home), withContentDescription("Home"),
-                        withParent(withParent(withId(R.id.nav_view))),
-                        isDisplayed()))
-        frameLayout3.check(matches(isDisplayed()))
-
-        val frameLayout4 = onView(
-                allOf(withId(R.id.navigation_map), withContentDescription("Map"),
-                        withParent(withParent(withId(R.id.nav_view))),
-                        isDisplayed()))
-        frameLayout4.check(matches(isDisplayed()))
-
-        val frameLayout5 = onView(
-                allOf(withId(R.id.navigation_notifications), withContentDescription("Notifications"),
-                        withParent(withParent(withId(R.id.nav_view))),
-                        isDisplayed()))
-        frameLayout5.check(matches(isDisplayed()))
+        page.verify_navitation_bar()
     }
 }
