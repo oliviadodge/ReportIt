@@ -3,9 +3,37 @@ package com.populus.reportit
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
+import org.hamcrest.Matchers
 import org.hamcrest.core.AllOf.allOf
 
 class MainActivityPage {
+
+    fun verify_action_bar() {
+        val viewGroup = onView(
+                allOf(withId(R.id.action_bar),
+                        withParent(allOf(withId(R.id.action_bar_container),
+                                withParent(withId(R.id.decor_content_parent)))),
+                        isDisplayed()))
+        viewGroup.check(matches(isDisplayed()))
+    }
+
+    fun verify_main_content_fragment() {
+        val frameLayout = onView(
+                Matchers.allOf(withId(R.id.nav_host_fragment),
+                        withParent(Matchers.allOf(withId(R.id.container),
+                                withParent(withId(android.R.id.content)))),
+                        isDisplayed()))
+        frameLayout.check(matches(isDisplayed()))
+    }
+
+    //TODO move this to home fragment since it should be part of fragment not activity
+    fun verify_floating_action_button() {
+        val imageButton = onView(
+                Matchers.allOf(withId(R.id.floatingActionButton), withContentDescription("Add report"),
+                        withParent(withParent(withId(R.id.nav_host_fragment))),
+                        isDisplayed()))
+        imageButton.check(matches(isDisplayed()))
+    }
 
     fun verify_navitation_bar() {
         val frameLayout2 = onView(
@@ -33,5 +61,4 @@ class MainActivityPage {
                         isDisplayed()))
         frameLayout5.check(matches(isDisplayed()))
     }
-
 }

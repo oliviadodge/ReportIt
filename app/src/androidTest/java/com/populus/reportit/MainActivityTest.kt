@@ -29,28 +29,10 @@ class MainActivityTest {
     }
 
     @Test
-    fun loadScreen_verify_ui() {
-        
-        val viewGroup = onView(
-                allOf(withId(R.id.action_bar),
-                        withParent(allOf(withId(R.id.action_bar_container),
-                                withParent(withId(R.id.decor_content_parent)))),
-                        isDisplayed()))
-        viewGroup.check(matches(isDisplayed()))
-
-        val frameLayout = onView(
-                allOf(withId(R.id.nav_host_fragment),
-                        withParent(allOf(withId(R.id.container),
-                                withParent(withId(android.R.id.content)))),
-                        isDisplayed()))
-        frameLayout.check(matches(isDisplayed()))
-
-        val imageButton = onView(
-                allOf(withId(R.id.floatingActionButton), withContentDescription("Add report"),
-                        withParent(withParent(withId(R.id.nav_host_fragment))),
-                        isDisplayed()))
-        imageButton.check(matches(isDisplayed()))
-
+    fun loadScreen_verify_ui_elements() {
+        page.verify_action_bar()
+        page.verify_main_content_fragment()
+        page.verify_floating_action_button()
         page.verify_navitation_bar()
     }
 }
