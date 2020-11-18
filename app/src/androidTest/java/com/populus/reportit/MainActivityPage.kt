@@ -26,15 +26,6 @@ class MainActivityPage {
         frameLayout.check(matches(isDisplayed()))
     }
 
-    //TODO move this to home fragment since it should be part of fragment not activity
-    fun verify_floating_action_button() {
-        val imageButton = onView(
-                Matchers.allOf(withId(R.id.floatingActionButton), withContentDescription("Add report"),
-                        withParent(withParent(withId(R.id.nav_host_fragment))),
-                        isDisplayed()))
-        imageButton.check(matches(isDisplayed()))
-    }
-
     fun verify_navitation_bar() {
         val frameLayout2 = onView(
                 allOf(withId(R.id.nav_view),
