@@ -3,6 +3,7 @@ package com.populus.reportit.home
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.populus.reportit.R
 import com.populus.reportit.ui.home.HomeFragment
 import org.junit.Before
 import org.junit.Test
@@ -16,7 +17,7 @@ class HomeFragmentTest {
 
     @Before
     fun setupPage() {
-        scenario = launchFragmentInContainer<HomeFragment>()
+        scenario = launchFragmentInContainer<HomeFragment>(null, R.style.Theme_ReportIt)
         page = HomeFragmentPage()
     }
 
